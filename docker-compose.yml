@@ -1,0 +1,93 @@
+version: '3'
+
+services:
+  mysql:
+    image: mysql:latest
+    environment:
+      MYSQL_ALLOW_EMPTY_PASSWORD: 1
+    ports:
+      - "3306:3306"
+
+  server:
+    image: eureka-server-image
+    build:
+      context: ./EurekaServer
+
+    ports:
+      - "8761:8761"
+
+  gateway:
+    image : gateway-image
+    build:
+      context: ./Gateway
+    ports:
+      - "8888:8888"
+
+  auth:
+    image: auth-service-image
+    build:
+      context: ./Auth
+    ports:
+      - "8081:8081"
+    depends_on:
+      mysql:
+        condition: service_started
+
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/kanbaniserdb
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD:
+    healthcheck:
+      test: "/usr/bin/mysql --user=root --password=  --execute \"SHOW DATABASES;\""
+      interval: 5s
+      timeout: 2s
+      retries: 100
+
+  board:
+    image: board-service-image
+    build:
+      context: ./Boards
+    ports:
+      - "8082:8082"
+    depends_on:
+      mysql:
+        condition: service_started
+
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/kanbaniserdb
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD:
+    healthcheck:
+      test: "/usr/bin/mysql --user=root --password=  --execute \"SHOW DATABASES;\""
+      interval: 5s
+      timeout: 2s
+      retries: 100
+
+  tasks:
+    image: tasks-service-image
+    build:
+      context: ./Tasks
+    ports:
+      - "8083:8083"
+    depends_on:
+      mysql:
+        condition: service_started
+
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/kanbaniserdb
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD:
+    healthcheck:
+      test: "/usr/bin/mysql --user=root --password=  --execute \"SHOW DATABASES;\""
+      interval: 5s
+      timeout: 2s
+      retries: 100
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    environment:
+      PMA_HOST: mysql
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD:
+    ports:
+      - "8083:80"
