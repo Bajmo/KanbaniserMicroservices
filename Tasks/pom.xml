@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>me.bajmo.kanbaniser.services</groupId>
-	<artifactId>Tasks</artifactId>
+	<artifactId>tasks</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Tasks</name>
 	<description>Tasks</description>

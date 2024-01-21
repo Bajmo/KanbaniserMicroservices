@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>me.bajmo.kanbaniser.services</groupId>
-    <artifactId>Gateway</artifactId>
+    <artifactId>eureka-gateway</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>Eureka Gateway</name>
     <description>Demo project for Spring Boot</description>

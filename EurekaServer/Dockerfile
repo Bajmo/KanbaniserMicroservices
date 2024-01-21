@@ -6,6 +6,6 @@ RUN mvn clean package
 
 FROM openjdk:17-jdk-alpine
 VOLUME /tmp
-ARG JAR_FILE=target/*.jar
+ARG JAR_FILE=*.jar
 COPY ${JAR_FILE} eureka-server.jar
 ENTRYPOINT ["java","-jar","/eureka-server.jar"]

@@ -9,7 +9,7 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>me.bajmo.kanbaniser.services</groupId>
-	<artifactId>Boards</artifactId>
+	<artifactId>boards</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
 	<name>Boards</name>
 	<description>Boards</description>
@@ -79,6 +79,16 @@
 			<artifactId>Auth</artifactId>
 			<version>0.0.1-SNAPSHOT</version>
 			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-openfeign-core</artifactId>
+			<version>4.1.0</version>
+			<scope>compile</scope>
+		</dependency>
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-web</artifactId>
 		</dependency>
 	</dependencies>
 

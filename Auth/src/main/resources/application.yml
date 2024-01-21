@@ -2,8 +2,11 @@ server:
   port: 8081
 
 spring:
+  cloud:
+    discovery:
+      enabled: true
   application:
-    name: AUTH-SERVICE
+    name: auth-service
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://localhost:3306/kanbaniserdb?createDatabaseIfNotExist=true
@@ -21,6 +24,10 @@ kanbaniser:
     jwtExpirationMs: 86400000
 
 eureka:
+  instance:
+    prefer-ip-address: true
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka
+    fetch-registry: true
+    register-with-eureka: true
